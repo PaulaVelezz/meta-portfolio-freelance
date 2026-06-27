@@ -38,6 +38,8 @@ Besides showcasing projects, the website is also a playground for experimenting 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-Latest-black?style=for-the-badge)
+![GSAP](https://img.shields.io/badge/GSAP-Latest-88CE02?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Custom-black)
 ![Status](https://img.shields.io/badge/Status-In%20Development-orange)
 
@@ -167,6 +169,10 @@ This project is licensed under the terms described in the **LICENSE.md** file.
 
 ## 👩‍💻 Author
 
-Designed & developed by **Paula V.**
+Designed & developed by **Paula Velez.**
 
-Frontend Developer • UI Designer • Creative Developer
+**Frontend Developer • UI Designer • Creative Developer**
+
+- 🌐 GitHub: https://github.com/PaulaVelezz
+- 💼 Portfolio: _Coming soon_
+- 🤝 Open to freelance projects, company opportunities, and creative collaborations.
