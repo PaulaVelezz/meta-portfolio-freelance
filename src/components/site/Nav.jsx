@@ -4,11 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const links = [
   {
-    label: "Proyectos",
-    to: "/projects",
-    type: "page",
-  },
-  {
     label: "Casos",
     href: "#casos",
   },
@@ -23,6 +18,16 @@ const links = [
   {
     label: "Equipo",
     href: "#equipo",
+  },
+  {
+    label: "Proyectos",
+    to: "/projects",
+    type: "page",
+  },
+  {
+    label: "Contacto",
+    to: "/contact",
+    type: "page",
   },
 ];
 
@@ -80,8 +85,8 @@ const Nav = () => {
           ))}
         </ul>
 
-        <a
-          href="#contacto"
+        <Link
+          to="/contact"
           className="group relative inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02] hover:bg-primary-600"
         >
           Agendar
@@ -91,7 +96,7 @@ const Nav = () => {
           >
             →
           </span>
-        </a>
+        </Link>
       </nav>
     </header>
   );
