@@ -13,15 +13,12 @@ const steps = [
 ];
 
 const Stepper = ({ currentStep, onStepClick }) => {
-  // Calculate vertical line progress percentage
   const progressPercent = ((currentStep - 1) / (steps.length - 1)) * 100;
 
   return (
     <div className="relative flex flex-col gap-6 py-2">
-      {/* Background vertical line */}
       <div className="absolute left-[13px] top-4 bottom-4 w-[2px] bg-border/80 -z-0" />
 
-      {/* Animated active vertical progress line */}
       <motion.div
         className="absolute left-[13px] top-4 w-[2px] bg-gradient-to-b from-primary to-accent origin-top -z-0"
         animate={{ height: `${progressPercent}%` }}
@@ -41,7 +38,6 @@ const Stepper = ({ currentStep, onStepClick }) => {
             onClick={() => onStepClick(step.id)}
             className="group flex items-center gap-3.5 text-left transition-all duration-300 focus:outline-none z-10"
           >
-            {/* Step Node Indicator */}
             <div className="relative flex items-center justify-center shrink-0">
               {isCompleted && (
                 <motion.div
@@ -72,14 +68,13 @@ const Stepper = ({ currentStep, onStepClick }) => {
               )}
             </div>
 
-            {/* Step Text */}
             <span
               className={`text-sm tracking-tight transition-all duration-300 ${
                 isActive
                   ? "font-semibold text-primary font-heading translate-x-1"
                   : isCompleted
-                  ? "font-medium text-foreground hover:text-primary"
-                  : "text-text-muted hover:text-text-secondary"
+                    ? "font-medium text-foreground hover:text-primary"
+                    : "text-text-muted hover:text-text-secondary"
               }`}
             >
               {step.label}

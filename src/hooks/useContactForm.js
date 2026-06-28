@@ -1,8 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFormik } from "formik";
 import { initialValues, stepValidationSchemas } from "../schemas/contactSchema";
-import { saveFormDraft, loadFormDraft, clearFormDraft } from "../utils/localStorage";
+import {
+  saveFormDraft,
+  loadFormDraft,
+  clearFormDraft,
+} from "../utils/localStorage";
 import { submitContactForm } from "../services/contactService";
+import { useToast } from "./useToast.js";
 
 export const TOTAL_STEPS = 7;
 
@@ -13,6 +18,7 @@ export const useContactForm = () => {
   const [showDraftModal, setShowDraftModal] = useState(false);
   const [savedDraft, setSavedDraft] = useState(null);
   const [autoSaveStatus, setAutoSaveStatus] = useState("Guardado ✓");
+  const { showToast } = useToast();
 
   const formik = useFormik({
     initialValues,
@@ -29,8 +35,18 @@ export const useContactForm = () => {
           await submitContactForm(values);
           clearFormDraft();
           setIsSubmitted(true);
+          showToast({
+            title: "Mensaje enviado",
+            description: "Te respondemos en menos de 24hs",
+            type: "success",
+          });
         } catch (error) {
-          alert("Hubo un error al enviar tu proyecto. Por favor, intentalo de nuevo.");
+          showToast({
+            title: "No pudimos enviar tu mensaje",
+            description:
+              "Revisá tu conexión e intentá nuevamente en unos segundos.",
+            type: "error",
+          });
         } finally {
           setIsSubmitting(false);
         }
@@ -90,7 +106,7 @@ export const useContactForm = () => {
       Object.keys(formik.values).reduce((acc, key) => {
         acc[key] = true;
         return acc;
-      }, {})
+      }, {}),
     );
 
     if (Object.keys(errors).length === 0) {

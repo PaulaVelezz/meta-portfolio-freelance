@@ -125,7 +125,6 @@ const StepCompetition = ({ formik }) => {
         </div>
       </div>
 
-      {/* Unique Value Propositions (6 independent inputs) */}
       <div className="flex flex-col gap-4 pt-6 border-t border-border/60">
         <div>
           <h3 className="text-lg font-bold font-heading text-foreground flex items-center gap-2">

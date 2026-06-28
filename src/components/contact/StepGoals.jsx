@@ -80,18 +80,6 @@ const StepGoals = ({ formik }) => {
           error={errors.successMetrics}
           touched={touched.successMetrics}
         />
-
-        <Textarea
-          label="¿Dónde querés que esté tu negocio en los próximos 12 meses?"
-          name="vision12Months"
-          placeholder="Contanos tu visión a mediano plazo para alinear la estrategia desde hoy..."
-          rows={4}
-          value={values.vision12Months}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={errors.vision12Months}
-          touched={touched.vision12Months}
-        />
       </div>
     </div>
   );

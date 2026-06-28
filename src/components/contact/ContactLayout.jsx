@@ -36,10 +36,8 @@ const ContactLayout = ({
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-        {/* Left Column (Sticky Sidebar) */}
         <Sidebar currentStep={currentStep} onStepClick={goToStep} />
 
-        {/* Right Column (Step Content & Navigation) */}
         <main className="flex-1 w-full min-w-0 bg-surface/40 rounded-3xl border border-border/70 p-6 sm:p-8 lg:p-10 shadow-elevated backdrop-blur-sm">
           <ProgressBar
             currentStep={currentStep}
