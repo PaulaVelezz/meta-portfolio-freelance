@@ -15,7 +15,6 @@ const testimonials = [
     role: "Fundadora · Lúmina Skincare",
     quote:
       "Pasamos de campañas dispersas a un sistema de crecimiento real. En seis meses triplicamos el revenue de DTC y duplicamos el AOV.",
-    highlight: "triplicamos el revenue",
   },
   {
     img: t2,
@@ -23,7 +22,6 @@ const testimonials = [
     role: "CEO · Cordillera Real Estate",
     quote:
       "El equipo entendió el negocio desde la primera reunión. Hoy generamos leads cualificados a un costo 40% menor que con la agencia anterior.",
-    highlight: "leads 40% más baratos",
   },
   {
     img: t3,
@@ -31,7 +29,6 @@ const testimonials = [
     role: "Head of Marketing · Noria EdTech",
     quote:
       "Estrategia, contenido y producto trabajando como una sola pieza. La conversión del onboarding subió 28% en el primer trimestre.",
-    highlight: "+28% en onboarding",
   },
   {
     img: t4,
@@ -39,7 +36,6 @@ const testimonials = [
     role: "Director Médico · Atlas Health",
     quote:
       "Profesionalizaron toda nuestra comunicación. La calidad del lead mejoró tanto que el equipo comercial cierra más con menos esfuerzo.",
-    highlight: "mejor calidad de lead",
   },
   {
     img: t5,
@@ -47,7 +43,6 @@ const testimonials = [
     role: "Directora Comercial · Casa Norte",
     quote:
       "Las landings y campañas funcionan como un reloj. Tenemos pipeline previsible mes a mes por primera vez en cinco años.",
-    highlight: "pipeline previsible",
   },
 ];
 
@@ -102,10 +97,8 @@ export function Testimonials() {
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               </AnimatePresence>
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-6">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-brand">
-                  {current.highlight}
-                </p>
+
+              <div className=" absolute bottom-4 left-4 max-w-[80%] rounded-xl bg-background/85 px-4 py-3 backdrop-blur-md transition-all duration-500 group-hover:bg-background">
                 <h3 className="mt-1 font-display text-2xl tracking-tight">
                   {current.name}
                 </h3>

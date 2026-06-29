@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LOGO from "../../assets/Logo.png";
 import { Link, useLocation } from "react-router-dom";
+import { MessageCircleMore } from "lucide-react";
+import { motion } from "framer-motion";
 
 const links = [
   {
@@ -85,18 +87,107 @@ const Nav = () => {
           ))}
         </ul>
 
-        <Link
-          to="/contact"
-          className="group relative inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02] hover:bg-primary-600"
-        >
-          Agendar
-          <span
-            aria-hidden
-            className="transition-transform group-hover:translate-x-0.5"
+        <div className="flex items-center gap-3">
+          <Link
+            to="/contact"
+            className=" group
+              relative
+              inline-flex
+              items-center
+              gap-2
+              overflow-hidden
+              rounded-full
+              bg-primary
+              px-4
+              py-2
+              text-sm
+              font-medium
+              text-primary-foreground
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+            "
           >
-            →
-          </span>
-        </Link>
+            <span
+              className="
+                absolute
+                inset-0
+                -z-10
+                translate-y-full
+                bg-primary-600
+                transition-transform
+                duration-300
+                ease-out
+                group-hover:translate-y-0
+              "
+            />
+            Agendar
+            <span
+              aria-hidden
+              className=" 
+                relative
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+              "
+            >
+              →
+            </span>
+          </Link>
+          <a
+            href="https://wa.me/5491111111111"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Escribinos por WhatsApp"
+            className="
+              group
+              relative
+              inline-flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              overflow-hidden
+              rounded-md
+               border
+            border-[#610F00]
+
+            bg-[#610F00]
+            text-white
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+              hover:border-[#22C55E]
+            "
+          >
+            {/* Background Animation */}
+            <span
+              className="
+              absolute
+              inset-0
+              -z-10
+              translate-y-full
+              bg-[#22C55E]
+              transition-transform
+              duration-300
+              ease-out
+              group-hover:translate-y-0
+            "
+            />
+            <MessageCircleMore
+              className="
+              h-5
+              w-5
+              transition-all
+              duration-300
+               text-white
+              group-hover:scale-110
+              group-hover:text-white
+              group-hover:-rotate-6
+            "
+            />
+          </a>
+        </div>
       </nav>
     </header>
   );

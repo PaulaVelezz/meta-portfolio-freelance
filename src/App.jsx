@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import Contact from "./pages/Contact";
+import FloatingWhatsApp from "./components/site/FloatingWhatsApp";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <FloatingWhatsApp />
     </>
   );
 }
