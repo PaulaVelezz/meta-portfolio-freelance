@@ -34,12 +34,15 @@ Besides showcasing projects, the website is also a playground for experimenting 
 - GSAP
 - Formik
 - Yup
+- Google Apps Script (backend / Sheets integration)
+- Google reCAPTCHA v3
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-Latest-black?style=for-the-badge)
 ![GSAP](https://img.shields.io/badge/GSAP-Latest-88CE02?style=for-the-badge)
+![reCAPTCHA](https://img.shields.io/badge/reCAPTCHA-v3-4285F4?logo=google)
 ![License](https://img.shields.io/badge/License-Custom-black)
 ![Status](https://img.shields.io/badge/Status-In%20Development-orange)
 
@@ -54,8 +57,24 @@ Besides showcasing projects, the website is also a playground for experimenting 
 - Interactive Project Showcase
 - Responsive Design
 - Multi-step Contact Experience
-- Google Sheets integration (planned)
+- Google Sheets integration as lightweight CRM
+- Anti-spam protection (honeypot, reCAPTCHA v3, rate limiting)
 - Modern reusable component architecture
+
+---
+
+# 🛡️ Security & Anti-Spam
+
+The contact form is connected to a Google Apps Script backend acting as a lightweight CRM (Google Sheets). To keep lead data clean and prevent bot/spam submissions, the pipeline runs three layers of protection, ordered from cheapest to most expensive check:
+
+1. **Honeypot field** — a hidden `_trap` field invisible to real users. Any submission with this field populated is rejected instantly, with zero external calls.
+2. **Rate limiting by IP** — using `CacheService`, a maximum of 3 submissions per IP is allowed every 10 minutes, preventing scripted flooding.
+3. **Google reCAPTCHA v3** — invisible challenge that scores each submission (0–1). Submissions scoring below `0.5` are rejected.
+
+```text
+Request → Honeypot check → Rate limit check → reCAPTCHA verification → Save to Sheet
+           (instant, free)   (instant, free)    (external API call)
+```
 
 ---
 
@@ -83,8 +102,9 @@ src/
 - [x] GSAP Page Loader
 - [x] Projects Page
 - [x] React Router
-- [ ] Multi-step Contact Form
-- [ ] Google Sheets Integration
+- [x] Multi-step Contact Form
+- [x] Google Sheets Integration
+- [x] Anti-spam protection (honeypot, reCAPTCHA v3, rate limiting)
 
 ---
 
