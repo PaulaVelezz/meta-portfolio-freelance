@@ -31,67 +31,81 @@ const steps = [
   },
 ];
 
-function TimelineStep({ step, index, progress }) {
-  const dotScale = useTransform(
-    progress,
-    [index * 0.18, index * 0.18 + 0.08],
-    [0.6, 1],
-  );
+function TimelineCard({ step, index, progress }) {
+  const start = index / steps.length;
+  const end = start + 0.12;
 
-  const dotOpacity = useTransform(
-    progress,
-    [index * 0.18, index * 0.18 + 0.08],
-    [0.3, 1],
-  );
+  const scale = useTransform(progress, [start, end], [0.6, 1]);
+
+  const opacity = useTransform(progress, [start, end], [0.35, 1]);
 
   return (
     <motion.li
-      initial={{ opacity: 0, x: -24 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-120px" }}
       transition={{
         duration: 0.7,
         delay: index * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="relative grid grid-cols-[2rem_minmax(0,1fr)] gap-5 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-8"
+      className="relative flex flex-col items-center"
     >
-      <div className="relative">
-        <motion.div
-          style={{
-            scale: dotScale,
-            opacity: dotOpacity,
-          }}
-          className="
-            absolute
-            left-2
-            top-3
-            h-3
-            w-3
-            -translate-x-1/2
-            rounded-full
-            bg-brand
-            shadow-glow
-            sm:left-6
-          "
-        />
-      </div>
+      {/* Dot */}
 
-      <div className="surface-card rounded-2xl p-6 transition-all duration-500 hover:border-primary-200 hover:shadow-elevated">
-        <div className="flex items-baseline gap-4">
-          <span className="font-display text-3xl text-brand-gradient sm:text-4xl">
-            {step.n}
-          </span>
+      <motion.div
+        style={{
+          scale,
+          opacity,
+        }}
+        className="
+          relative
+          z-20
+          h-4
+          w-4
+          rounded-full
+          bg-brand
+          shadow-glow
+          ring-4
+          ring-background
+        "
+      />
 
-          <h3 className="text-xl font-medium tracking-tight sm:text-2xl">
-            {step.title}
-          </h3>
-        </div>
+      {/* Connector */}
 
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+      <div className="h-8 w-px bg-border/40" />
+
+      {/* Card */}
+
+      <motion.div
+        style={{
+          opacity,
+          y: useTransform(progress, [start, end], [24, 0]),
+        }}
+        className="
+          surface-card
+          w-full
+          rounded-2xl
+          p-6
+          transition-all
+          duration-500
+          hover:-translate-y-1
+          hover:border-primary-300
+          hover:shadow-elevated
+        "
+      >
+        <span className="font-display text-4xl text-brand-gradient">
+          {step.n}
+        </span>
+
+        <h3 className="mt-4 text-xl font-medium tracking-tight">
+          {step.title}
+        </h3>
+
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {step.body}
         </p>
-      </div>
+      </motion.div>
     </motion.li>
   );
 }
@@ -101,18 +115,21 @@ const Methodology = () => {
 
   const { scrollYProgress } = useScroll({
     target: timelineRef,
-    offset: ["start 75%", "end 20%"],
+    offset: ["start 75%", "end 30%"],
   });
 
-  const scaleY = useSpring(scrollYProgress, {
+  const scaleX = useSpring(scrollYProgress, {
     stiffness: 120,
     damping: 30,
     mass: 0.35,
   });
 
   return (
-    <section id="metodologia" className="relative py-28 sm:py-28">
-      <div className="mx-auto max-w-6xl px-6">
+    <section
+      id="metodologia"
+      className="relative py-28 sm:py-28 overflow-hidden"
+    >
+      <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Metodología"
           title={
@@ -123,46 +140,46 @@ const Methodology = () => {
               </span>
             </>
           }
-          description="Un proceso claro, iterativo y medible. Cada paso tiene un entregable y un indicador."
+          description="Un proceso claro, iterativo y medible. Cada etapa tiene un objetivo concreto y genera información para la siguiente."
         />
 
-        <div ref={timelineRef} className="relative mt-16">
-          {/* Línea gris */}
+        <div ref={timelineRef} className="relative mt-20">
+          {/* Línea base */}
+
           <div
             className="
-              absolute
-              left-4
-              top-2
-              bottom-2
-              w-[2px]
-              bg-border
-              sm:left-6
-            "
+                absolute
+                left-0
+                right-0
+                top-2
+                h-[2px]
+                bg-border
+              "
           />
 
-          {/* Línea coloreada */}
+          {/* Línea animada */}
+
           <motion.div
             style={{
-              scaleY,
-              transformOrigin: "top",
+              scaleX,
+              transformOrigin: "left",
             }}
             className="
-              absolute
-              left-4
-              top-2
-              bottom-2
-              w-[2px]
-              bg-gradient-to-b
-              from-brand
-              via-brand-glow
-              to-accent
-              sm:left-6
-            "
+                absolute
+                left-0
+                right-0
+                top-2
+                h-[2px]
+                bg-gradient-to-r
+                from-brand
+                via-brand-glow
+                to-accent
+              "
           />
 
-          <ol className="space-y-10 sm:space-y-14">
+          <ol className="grid grid-cols-1 gap-10 pt-2 md:grid-cols-5 md:gap-8">
             {steps.map((step, index) => (
-              <TimelineStep
+              <TimelineCard
                 key={step.n}
                 step={step}
                 index={index}

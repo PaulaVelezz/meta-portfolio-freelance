@@ -4,7 +4,6 @@ import Portfolio from "@/components/site/Portfolio";
 import SectorsAlternative from "@/components/site/SectorsAlternative";
 import Problems from "@/components/site/Problems";
 import Methodology from "@/components/site/Methodology";
-import Capabilities from "@/components/site/Capabilities";
 import Team from "@/components/site/Team";
 import CTA from "@/components/site/CTA";
 import Footer from "@/components/site/Footer";
@@ -23,7 +22,6 @@ function HomePage() {
       <SectorsAlternative />
       <Problems />
       <Methodology />
-      <Capabilities />
       <GrowthStack />
       <Team />
       <Testimonials />

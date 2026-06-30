@@ -251,7 +251,7 @@ const ProjectModal = ({ project, onClose }) => {
                         src={src}
                         alt=""
                         loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       />
                     </button>
                   ))}
@@ -280,7 +280,7 @@ const ProjectModal = ({ project, onClose }) => {
                   >
                     Agendar reunión →
                   </a>
- 
+
                   <button
                     onClick={onClose}
                     className="rounded-full border border-border bg-white px-5 py-3 text-sm text-text-primary hover:bg-primary-50 transition-colors"
@@ -390,8 +390,8 @@ const ProjectModal = ({ project, onClose }) => {
                       aria-label={`Imagen ${i + 1}`}
                       className={`relative h-14 w-20 overflow-hidden rounded-md border transition-all ${
                         i === galleryIndex
-                           ? "border-primary opacity-100"
-                           : "border-border opacity-50 hover:opacity-80"
+                          ? "border-primary opacity-100"
+                          : "border-border opacity-50 hover:opacity-80"
                       }`}
                     >
                       <img

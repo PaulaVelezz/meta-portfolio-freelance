@@ -4,12 +4,6 @@ import { SectionHeader } from "./SectionHeader";
 import ProjectModal from "./ProjectModal";
 import { INDUSTRIES, SERVICES, projects } from "./portfolio-data";
 
-const SPAN_CLASS = {
-  1: "md:row-span-2",
-  2: "md:row-span-3",
-  3: "md:row-span-4",
-};
-
 const Portfolio = () => {
   const [services, setServices] = useState(new Set());
   const [industries, setIndustries] = useState(new Set());
@@ -42,7 +36,7 @@ const Portfolio = () => {
   const anyActive = services.size + industries.size > 0;
 
   return (
-    <section id="casos" className="relative py-28 sm:py-28">
+    <section id="casos" className="relative py-32 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <SectionHeader
@@ -107,7 +101,6 @@ const Portfolio = () => {
               items={INDUSTRIES}
               selected={industries}
               onPick={(v) => toggle(industries, setIndustries, v)}
-              onClose={() => setOpenMenu(null)}
             />
           </FilterPill>
 
@@ -141,7 +134,7 @@ const Portfolio = () => {
           ) : (
             <motion.div
               layout
-              className="grid grid-cols-1 gap-5 md:grid-cols-3 md:auto-rows-[80px]"
+              className="grid grid-cols-1 gap-6 md:grid-cols-3"
             >
               <AnimatePresence mode="popLayout">
                 {filtered.map((p, i) => (
@@ -261,105 +254,111 @@ function DropdownList({ items, selected, onPick, onClose }) {
 }
 
 /* ---------------- PROJECT CARD ---------------- */
-
 function ProjectCard({ project, index, onOpen }) {
   return (
     <motion.button
+      type="button"
       layout
       onClick={onOpen}
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`
-      group
-      surface-card
-      relative
-      overflow-hidden
-      rounded-2xl
-      text-left
-      transition-all
-      duration-500
-      hover:-translate-y-1
-      hover:border-primary-300
-      hover:shadow-elevated
-      ${SPAN_CLASS[project.span]}
-      `}
+      exit={{ opacity: 0, y: -10, scale: 0.98 }}
+      transition={{
+        duration: 0.55,
+        delay: Math.min(index * 0.04, 0.3),
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={`group surface-card relative overflow-hidden rounded-2xl p-2 text-left transition-all duration-500 hover:-translate-y-1 hover:border-foreground/15 hover:shadow-elevated`}
     >
-      <div className="absolute inset-0">
-        <img
-          src={project.cover}
-          alt={project.client}
-          loading="lazy"
-          className="
-          h-full
-          w-full
-          object-cover
-          transition-all
-          duration-[1400ms]
-          ease-out
-          group-hover:scale-[1.06]
-          group-hover:blur-[2px]
-          "
-        />
+      {/* IMAGE */}
+      <div className="relative overflow-hidden rounded-xl">
+        <div className="relative h-[320px]">
+          <img
+            src={project.cover}
+            alt={project.client}
+            loading="lazy"
+            className="
+              absolute inset-0
+              h-full w-full
+              object-cover
+              grayscale
+              transition-all
+              duration-[1400ms]
+              ease-out
+              group-hover:scale-[1.05]
+              group-hover:grayscale-0
+            "
+          />
 
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${project.accent} mix-blend-overlay opacity-50`}
-        />
+          {/* overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
 
-        <div
-          className="
-          absolute inset-0
-          bg-gradient-to-t
-          from-background
-          from-15%
-          via-background/60
-          via-50%
-          to-transparent
-        "
-        />
+          {/* HEADER */}
+          <div className="absolute inset-x-5 top-5 flex items-start justify-between">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/85 px-3 py-1 text-[10px] uppercase tracking-[0.18em] backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              {project.industry}
+            </span>
 
-        <div
-          className="
-          absolute inset-0
-          bg-background/0
-          transition-colors
-          duration-500
-          group-hover:bg-background/25
-        "
-        />
-      </div>
-
-      <div className="relative flex h-full min-h-[300px] flex-col justify-between p-5 sm:p-6">
-        {/* Header Card */}
-        <div className="flex items-start justify-between gap-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-2.5 py-1 text-[10px] uppercase tracking-wider text-text-primary backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-brand" />
-            {project.industry}
-          </span>
-
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background/80 text-sm text-text-primary backdrop-blur-md transition-all group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary">
             <span
-              aria-hidden
-              className="transition-transform group-hover:rotate-45"
+              className="
+                inline-flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                bg-primary
+                text-primary-foreground
+                transition-transform
+                duration-500
+                group-hover:rotate-45
+                group-hover:scale-110
+              "
             >
               ↗
             </span>
-          </span>
-        </div>
-        {/* Info */}
-        <div>
-          <p className="text-xs uppercase">{project.client}</p>
-
-          <h3 className="mt-2 text-xl">{project.tagline}</h3>
-
-          <div className="mt-3 flex gap-2">
-            {project.services.slice(0, 3).map((s) => (
-              <span key={s} className="text-[10px] opacity-70">
-                {s}
-              </span>
-            ))}
           </div>
+
+          {/* TEXT */}
+          <div className="absolute bottom-6 left-6 right-6">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-brand-glow">
+              {project.client}
+            </p>
+
+            <h3 className="mt-2 text-2xl font-medium leading-tight tracking-tight">
+              {project.tagline}
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      {/* FOOTER */}
+      <div className="px-3 py-4">
+        <div className="flex flex-wrap gap-2">
+          {project.services.slice(0, 3).map((service) => (
+            <span
+              key={service}
+              className="
+                rounded-full
+                border
+                border-border
+                bg-background
+                px-3
+                py-1
+                text-[10px]
+                uppercase
+                tracking-[0.12em]
+                text-muted-foreground
+                transition-colors
+                duration-300
+                group-hover:border-primary/20
+                group-hover:text-foreground
+              "
+            >
+              {service}
+            </span>
+          ))}
         </div>
       </div>
     </motion.button>
