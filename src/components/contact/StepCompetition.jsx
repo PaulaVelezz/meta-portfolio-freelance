@@ -7,7 +7,7 @@ const StepCompetition = ({ formik }) => {
   const { values, handleChange, handleBlur, setFieldValue } = formik;
 
   const competitors = values.competitors || [];
-  const uniqueValues = values.uniqueValues || ["", "", "", "", "", ""];
+  const uniqueValues = values.uniqueValues || ["", "", "", ""];
 
   const addCompetitor = () => {
     setFieldValue("competitors", [
@@ -132,13 +132,13 @@ const StepCompetition = ({ formik }) => {
             ¿Qué hace diferente a tu empresa?
           </h3>
           <p className="text-xs text-text-secondary mt-0.5 font-body">
-            Ingresá hasta 6 factores diferenciadores de tu marca frente al
+            Ingresá hasta 4 factores diferenciadores de tu marca frente al
             mercado.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[0, 1, 2, 3, 4, 5].map((idx) => (
+          {[0, 1, 2, 3].map((idx) => (
             <Input
               key={idx}
               label={`Valor Único #${idx + 1}`}

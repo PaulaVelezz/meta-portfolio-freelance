@@ -32,7 +32,7 @@ const problems = [
 
 const Problems = () => {
   return (
-    <section className="relative border-y border-border bg-surface py-32 sm:py-40">
+    <section className="relative border-y border-border bg-surface py-28 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Lo que resolvemos"

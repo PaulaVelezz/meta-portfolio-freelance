@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { SectionHeader } from "./SectionHeader";
 import ProjectModal from "./ProjectModal";
 import { INDUSTRIES, SERVICES, projects } from "./portfolio-data";
@@ -14,6 +14,8 @@ const Portfolio = () => {
   const [services, setServices] = useState(new Set());
   const [industries, setIndustries] = useState(new Set());
   const [active, setActive] = useState(null);
+  const [openMenu, setOpenMenu] = useState(null);
+  const wrapRef = useRef(null);
 
   const toggle = (set, setSet, value) => {
     const next = new Set(set);
@@ -40,7 +42,7 @@ const Portfolio = () => {
   const anyActive = services.size + industries.size > 0;
 
   return (
-    <section id="casos" className="relative py-32 sm:py-40">
+    <section id="casos" className="relative py-28 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <SectionHeader
@@ -58,7 +60,7 @@ const Portfolio = () => {
 
           <div className="flex items-center gap-3 lg:justify-end">
             <span className="text-xs text-muted-foreground">
-              {filtered.length} de {projects.length}
+              {filtered.length} de {projects.length} proyectos
             </span>
 
             {anyActive && (
@@ -72,21 +74,55 @@ const Portfolio = () => {
           </div>
         </div>
 
-        {/* FILTERS */}
-        <div className="mt-12 space-y-5">
-          <FilterRow
+        {/* FILTER MENU PILLS */}
+        <div
+          ref={wrapRef}
+          className="relative mt-12 flex flex-wrap items-center gap-3"
+        >
+          <FilterPill
             label="Servicios"
-            items={SERVICES}
-            active={services}
-            onToggle={(v) => toggle(services, setServices, v)}
-          />
+            count={services.size}
+            open={openMenu === "services"}
+            onToggle={() =>
+              setOpenMenu(openMenu === "services" ? null : "services")
+            }
+          >
+            <DropdownList
+              items={SERVICES}
+              selected={services}
+              onPick={(v) => toggle(services, setServices, v)}
+              onClose={() => setOpenMenu(null)}
+            />
+          </FilterPill>
 
-          <FilterRow
+          <FilterPill
             label="Industrias"
-            items={INDUSTRIES}
-            active={industries}
-            onToggle={(v) => toggle(industries, setIndustries, v)}
-          />
+            count={industries.size}
+            open={openMenu === "industries"}
+            onToggle={() =>
+              setOpenMenu(openMenu === "industries" ? null : "industries")
+            }
+          >
+            <DropdownList
+              items={INDUSTRIES}
+              selected={industries}
+              onPick={(v) => toggle(industries, setIndustries, v)}
+              onClose={() => setOpenMenu(null)}
+            />
+          </FilterPill>
+
+          {anyActive && (
+            <button
+              type="button"
+              onClick={() => {
+                clearAll();
+                setOpenMenu(null);
+              }}
+              className="ml-auto text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Limpiar filtros
+            </button>
+          )}
         </div>
 
         {/* GRID */}
@@ -129,32 +165,97 @@ const Portfolio = () => {
 
 export default Portfolio;
 
-/* ---------------- FILTER ROW ---------------- */
+/* ---------------- FILTER PILL ---------------- */
 
-function FilterRow({ label, items, active, onToggle }) {
+function FilterPill({ label, count, value, open, onToggle, children }) {
+  const active = open || (count ?? 0) > 0;
+
   return (
-    <div className="grid gap-3 sm:grid-cols-[7rem_minmax(0,1fr)]">
-      <p className="text-xs uppercase text-muted-foreground">{label}</p>
+    <div className="relative">
+      <button
+        type="button"
+        onClick={onToggle}
+        className={`inline-flex items-center gap-3 rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-all duration-200 ${
+          active
+            ? "border-primary bg-primary/5 text-primary"
+            : "border-border bg-white text-text-secondary hover:border-primary/40 hover:text-primary"
+        }`}
+      >
+        <span>{label}</span>
 
-      <div className="flex flex-wrap gap-2">
-        {items.map((v) => {
-          const isOn = active.has(v);
+        {value ? (
+          <span className="normal-case tracking-normal text-text-secondary">
+            {value}
+          </span>
+        ) : count > 0 ? (
+          <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-white">
+            {count}
+          </span>
+        ) : null}
 
-          return (
-            <button
-              key={v}
-              onClick={() => onToggle(v)}
-              className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-                isOn
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-white text-text-secondary border-border hover:bg-primary-50"
+        <span
+          className={`text-base leading-none transition-transform ${
+            open ? "rotate-45" : ""
+          }`}
+        >
+          +
+        </span>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            transition={{
+              duration: 0.18,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute left-0 top-full z-40 mt-3 min-w-[260px] overflow-hidden rounded-2xl border border-border bg-background shadow-elevated"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ---------------- DROPDOWN LIST ---------------- */
+
+function DropdownList({ items, selected, onPick, onClose }) {
+  return (
+    <div className="py-2">
+      {items.map((item) => {
+        const active = selected.has(item);
+
+        return (
+          <button
+            key={item}
+            type="button"
+            onClick={() => {
+              onPick(item);
+              onClose?.();
+            }}
+            className={`flex w-full items-center justify-between px-4 py-2.5 text-left text-sm transition-colors ${
+              active
+                ? "text-primary bg-primary/5"
+                : "text-text-secondary hover:bg-primary-50 hover:text-primary"
+            }`}
+          >
+            <span>{item}</span>
+
+            <span
+              className={`text-xs transition-opacity ${
+                active ? "opacity-100" : "opacity-0"
               }`}
             >
-              {v}
-            </button>
-          );
-        })}
-      </div>
+              ●
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 }

@@ -144,6 +144,32 @@ const StepReview = ({ formik, onEditStep }) => {
                 </span>
               </div>
             )}
+            {values.brandKit && (
+              <div>
+                <span className="text-text-muted text-xs block">
+                  Kit de identidad cargado
+                </span>
+                <span className="font-medium text-foreground text-xs">
+                  {values.brandKit}
+                </span>
+              </div>
+            )}
+            <div>
+              <span className="text-text-muted text-xs block">
+                Dominio deseado
+              </span>
+              <p className="font-medium text-foreground text-xs leading-relaxed mt-0.5">
+                {values.desiredDomain || "-"}
+              </p>
+            </div>
+            <div>
+              <span className="text-text-muted text-xs block">
+                Redes sociales
+              </span>
+              <span className="font-medium text-foreground">
+                {values.socialLinks || "-"}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -151,6 +177,22 @@ const StepReview = ({ formik, onEditStep }) => {
         <div className="p-5 rounded-2xl border border-border bg-surface/80 flex flex-col gap-3">
           {renderSectionHeader("04 El Negocio", 4)}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+            <div>
+              <span className="text-text-muted text-xs block">
+                Servicios ofrecidos
+              </span>
+              <p className="font-medium text-foreground text-xs">
+                {values.offeredServices || "-"}
+              </p>
+            </div>
+            <div>
+              <span className="text-text-muted text-xs block">
+                Modelo de negocio
+              </span>
+              <p className="font-medium text-foreground text-xs">
+                {values.businessModel || "-"}
+              </p>
+            </div>
             <div>
               <span className="text-text-muted text-xs block">
                 Público Objetivo
@@ -164,6 +206,14 @@ const StepReview = ({ formik, onEditStep }) => {
               <span className="font-medium text-foreground text-xs">
                 {values.marketScope || "-"}
               </span>
+            </div>
+            <div>
+              <span className="text-text-muted text-xs block">
+                Principal desafío
+              </span>
+              <p className="font-medium text-foreground text-xs">
+                {values.biggestChallenge || "-"}
+              </p>
             </div>
           </div>
         </div>
@@ -196,6 +246,16 @@ const StepReview = ({ formik, onEditStep }) => {
               {(values.competitors || [])
                 .filter((c) => c.name)
                 .map((c) => c.name)
+                .join(", ") || "Ninguno detallado"}
+            </span>
+          </div>
+          <div className="text-sm">
+            <span className="text-text-muted text-xs block">
+              Diferenciadores cargados
+            </span>
+            <span className="font-medium text-foreground text-xs">
+              {(values.uniqueValues || [])
+                .filter((v) => v.trim() !== "")
                 .join(", ") || "Ninguno detallado"}
             </span>
           </div>

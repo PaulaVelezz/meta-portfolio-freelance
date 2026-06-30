@@ -1,10 +1,25 @@
+import { getRecaptchaToken } from "../utils/loadRecaptcha";
+
+const getClientIp = async () => {
+  try {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+    return data.ip;
+  } catch {
+    return "unknown";
+  }
+};
+
 export const submitContactForm = async (formData) => {
   const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
+  const recaptchaToken = await getRecaptchaToken("contact_form");
+  const clientIp = await getClientIp();
 
   const payload = {
     ...formData,
+    recaptchaToken,
+    clientIp,
     submittedAt: new Date().toISOString(),
-    userAgent: navigator.userAgent,
   };
 
   // Mock mode

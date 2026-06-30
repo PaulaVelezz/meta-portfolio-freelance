@@ -11,7 +11,8 @@ const scopeOptions = [
 ];
 
 const StepBusiness = ({ formik }) => {
-  const { values, handleChange, handleBlur, errors, touched, setFieldValue } = formik;
+  const { values, handleChange, handleBlur, errors, touched, setFieldValue } =
+    formik;
 
   return (
     <div className="flex flex-col gap-6">
@@ -25,7 +26,7 @@ const StepBusiness = ({ formik }) => {
       </div>
 
       <div className="flex flex-col gap-5 pt-2">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Input
             label="Servicios Ofrecidos"
             name="offeredServices"
@@ -35,17 +36,6 @@ const StepBusiness = ({ formik }) => {
             onBlur={handleBlur}
             error={errors.offeredServices}
             touched={touched.offeredServices}
-          />
-
-          <Input
-            label="Productos Destacados"
-            name="products"
-            placeholder="Ej. SaaS, Cursos, Físicos"
-            value={values.products}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.products}
-            touched={touched.products}
           />
 
           <Input

@@ -5,48 +5,66 @@ import { useGSAP } from "@gsap/react";
 import { SectionHeader } from "./SectionHeader";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowDown } from "lucide-react";
+import LOGO_MP from "../../assets/mercado-pago-1.svg";
+import LOGO_GLOBANT from "../../assets/globant-1.svg";
+import LOGO_SANTANDER from "../../assets/banco-santander-logo.svg";
+import LOGO_NX from "../../assets/naranja-x-1.svg";
+import LOGO_ACCENTURE from "../../assets/accenture-8.svg";
+import LOGO_VERCEL from "../../assets/vercel.svg";
+import LOGO_TN from "../../assets/tiendanube-1.svg";
+import LOGO_PP from "../../assets/personal-pay-white-doble.svg";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const companies = [
   {
-    name: "Mercado Libre",
-    logo: "/logos/mercadolibre.svg",
-    bg: "#FFE600",
-    text: "#1a1a1a",
+    name: "Mercado Pago",
+    logo: LOGO_MP,
+    bg: "#8A9A1A",
+    text: "#fff",
   },
   {
     name: "Globant",
-    logo: "/logos/globant.svg",
-    bg: "#B4D233",
+    logo: LOGO_GLOBANT,
+    bg: "#6B7A0F",
+    text: "#fff",
+  },
+  {
+    name: "Accenture",
+    logo: LOGO_ACCENTURE,
+    bg: "#A8B822",
     text: "#1a1a1a",
   },
   {
-    name: "Despegar",
-    logo: "/logos/despegar.svg",
-    bg: "#00AEEF",
-    text: "#fff",
-  },
-  {
     name: "Naranja X",
-    logo: "/logos/naranjax.svg",
-    bg: "#FF6B00",
+    logo: LOGO_NX,
+    bg: "#5C6B0A",
     text: "#fff",
   },
-  { name: "OLX", logo: "/logos/olx.svg", bg: "#00A650", text: "#fff" },
   {
-    name: "Personal",
-    logo: "/logos/personal.svg",
-    bg: "#7B2D8B",
+    name: "Vercel",
+    logo: LOGO_VERCEL,
+    bg: "#748810",
+    text: "#fff",
+  },
+  {
+    name: "TiendaNube",
+    logo: LOGO_TN,
+    bg: "#7A8C14",
     text: "#fff",
   },
   {
     name: "Santander",
-    logo: "/logos/santander.svg",
-    bg: "#EC0000",
+    logo: LOGO_SANTANDER,
+    bg: "#4E5C08",
     text: "#fff",
   },
-  { name: "Claro", logo: "/logos/claro.svg", bg: "#DA291C", text: "#fff" },
+  {
+    name: "Personal Pay",
+    logo: LOGO_PP,
+    bg: "#96A81E",
+    text: "#1a1a1a",
+  },
 ];
 
 // Mitad superior (curvan por arriba), mitad inferior (curvan por abajo)
@@ -86,8 +104,8 @@ function CompanyCard({ company, index }) {
       <Tooltip name={company.name} />
       <div
         className="
-          relative w-24 h-32
-          rounded-2xl
+          relative w-36 h-20
+          rounded-md
           border-2 border-white/30
           shadow-[0_20px_60px_rgba(0,0,0,0.18)]
           flex flex-col items-center justify-center
@@ -102,13 +120,13 @@ function CompanyCard({ company, index }) {
           src={company.logo}
           alt={company.name}
           draggable={false}
-          className="w-12 h-12 object-contain select-none"
+          className="w-20 h-20 object-contain select-none"
           style={{
             filter:
               company.text === "#fff" ? "brightness(0) invert(1)" : "none",
           }}
         />
-        <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 rounded-t-2xl pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 rounded-t-md pointer-events-none" />
       </div>
     </div>
   );
@@ -129,7 +147,7 @@ const LogosScroll = () => {
           pin: true,
           scrub: 1,
           start: "top top",
-          end: "+=5000",
+          end: "+=2000",
           anticipatePin: 1,
           fastScrollEnd: true,
           invalidateOnRefresh: true,
@@ -146,8 +164,8 @@ const LogosScroll = () => {
           scrollTrigger: {
             trigger: box,
             containerAnimation: mainTrack,
-            start: "left 90%",
-            end: "right 10%",
+            start: "left 100%",
+            end: "right 40%",
             scrub: 1.2,
           },
         });
@@ -162,8 +180,8 @@ const LogosScroll = () => {
           scrollTrigger: {
             trigger: box,
             containerAnimation: mainTrack,
-            start: "left 90%",
-            end: "right 10%",
+            start: "left 100%",
+            end: "right 40%",
             scrub: 1.2,
           },
         });
@@ -183,9 +201,9 @@ const LogosScroll = () => {
         <SectionHeader
           title={
             <>
-              Más que{" "}
+              Clientes con quienes ya <br />
               <span className="font-display italic text-brand-gradient">
-                marketing.
+                construimos algo real.
               </span>
             </>
           }

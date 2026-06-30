@@ -63,7 +63,7 @@ export function Testimonials() {
     setActive((a) => (a + dir + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonios" className="relative py-32 sm:py-40">
+    <section id="testimonios" className="relative py-28 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Testimonios"

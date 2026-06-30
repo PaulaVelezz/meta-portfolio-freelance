@@ -144,6 +144,21 @@ const StepContact = ({ formik }) => {
           error={errors.instagram}
           touched={touched.instagram}
         />
+
+        {/* Honeypot */}
+        <div
+          className="absolute w-px h-px overflow-hidden opacity-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <input
+            type="text"
+            name="_trap"
+            value={values._trap}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
       </div>
     </div>
   );

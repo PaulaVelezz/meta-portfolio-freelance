@@ -152,7 +152,7 @@ const sectors = [
 const Sectors = () => {
   const [active, setActive] = useState(null);
   return (
-    <section id="sectores" className="relative py-32 sm:py-40">
+    <section id="sectores" className="relative py-36 sm:py-36">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/10 blur-3xl"

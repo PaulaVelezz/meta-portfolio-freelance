@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const CTA = () => {
   return (
-    <section id="contacto" className="relative overflow-hidden py-32 sm:py-44">
+    <section id="contacto" className="relative overflow-hidden py-28 sm:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/25 blur-[120px] animate-pulse-glow" />
         <div className="absolute inset-0 bg-grid opacity-[0.18] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />

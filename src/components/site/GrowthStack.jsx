@@ -102,7 +102,7 @@ const GrowthStack = () => {
   return (
     <section
       id="herramientas"
-      className="relative overflow-hidden border-y border-foreground/5 bg-surface-elevated py-32 sm:py-40"
+      className="relative overflow-hidden border-y border-foreground/5 bg-surface-elevated py-28 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader

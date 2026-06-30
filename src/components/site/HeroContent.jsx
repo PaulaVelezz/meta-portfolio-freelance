@@ -4,26 +4,27 @@ const HeroContent = () => {
   return (
     <>
       <div className="mx-auto max-w-6xl px-6">
-        <div className="hero-badge mx-auto flex max-w-fit items-center gap-2 rounded-full border border-border bg-primary-50 px-3.5 py-1.5 text-xs text-text-secondary backdrop-blur">
+        <div className="hero-badge mx-auto flex max-w-fit items-center gap-2 rounded-full border border-border bg-primary-50 px-3.5 py-1.5 font-semibold text-xs text-text-secondary backdrop-blur">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
           </span>
-          Aceptando proyectos para Q1 — 2 lugares
+          AGENDA ABIERTA
         </div>
 
-        <h1 className="hero-title mx-auto mt-8 max-w-4xl text-center text-5xl font-semibold tracking-[-0.03em] sm:text-6xl md:text-7xl">
+        <h1 className="hero-title mx-auto mt-8 max-w-5xl text-center text-5xl font-semibold tracking-[-0.03em] sm:text-6xl md:text-7xl">
           <span className="text-gradient">
-            Contenido, performance y desarrollo
+            Impulsamos tu crecimiento digital con
           </span>{" "}
           <span className="font-display italic text-brand-gradient">
-            para marcas que quieren crecer.
+            estrategia, contenido y desarrollo.
           </span>
         </h1>
 
         <p className="hero-description mx-auto mt-7 max-w-2xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Estrategia, creatividad y tecnología trabajando juntas para
-          transformar presencia digital en resultados reales.
+          Combinamos creatividad, tecnología y una mirada estratégica para
+          construir una presencia digital que acompañe el crecimiento de tu
+          negocio.
         </p>
 
         <div className="hero-buttons mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">

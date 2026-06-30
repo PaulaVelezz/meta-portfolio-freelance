@@ -1,6 +1,9 @@
 import * as Yup from "yup";
 
 export const initialValues = {
+  // Honeypot — never filled by real users
+  _trap: "",
+
   // Step 1 — Contact
   company: "",
   firstName: "",
@@ -21,19 +24,13 @@ export const initialValues = {
 
   // Step 3 — Branding
   businessDescription: "",
-  mission: "",
-  vision: "",
-  values: "",
-  brandPersonality: "",
-  currentColors: "",
-  typography: "",
   existingLogoName: "",
+  brandKit: "",
   desiredDomain: "",
   socialLinks: "",
 
   // Step 4 — Business
   offeredServices: "",
-  products: "",
   businessModel: "",
   targetAudience: "",
   marketScope: "Nacional", // default option
@@ -46,7 +43,7 @@ export const initialValues = {
 
   // Step 6 — Competition
   competitors: [{ name: "", website: "", pros: "", cons: "" }],
-  uniqueValues: ["", "", "", "", "", ""],
+  uniqueValues: ["", "", "", ""],
 
   // Step 7 — Review
   consent: false,
@@ -55,6 +52,7 @@ export const initialValues = {
 export const stepValidationSchemas = [
   // Step 1: Contact Information
   Yup.object().shape({
+    _trap: Yup.string().max(0, "Bot detected."),
     company: Yup.string().trim().required("Ingresá el nombre de tu empresa"),
     firstName: Yup.string().trim().required("Ingresá tu nombre"),
     lastName: Yup.string().trim(),
@@ -83,13 +81,8 @@ export const stepValidationSchemas = [
     businessDescription: Yup.string()
       .trim()
       .required("Contanos brevemente sobre tu negocio"),
-    mission: Yup.string().trim(),
-    vision: Yup.string().trim(),
-    values: Yup.string().trim(),
-    brandPersonality: Yup.string().trim(),
-    currentColors: Yup.string().trim(),
-    typography: Yup.string().trim(),
     existingLogoName: Yup.string().trim(),
+    brandKit: Yup.string().trim(),
     desiredDomain: Yup.string().trim(),
     socialLinks: Yup.string().trim(),
   }),
@@ -97,7 +90,6 @@ export const stepValidationSchemas = [
   // Step 4: Business
   Yup.object().shape({
     offeredServices: Yup.string().trim(),
-    products: Yup.string().trim(),
     businessModel: Yup.string().trim(),
     targetAudience: Yup.string()
       .trim()
@@ -121,7 +113,7 @@ export const stepValidationSchemas = [
         website: Yup.string().trim(),
         pros: Yup.string().trim(),
         cons: Yup.string().trim(),
-      })
+      }),
     ),
     uniqueValues: Yup.array().of(Yup.string().trim()),
   }),
@@ -130,7 +122,7 @@ export const stepValidationSchemas = [
   Yup.object().shape({
     consent: Yup.boolean().oneOf(
       [true],
-      "Debés aceptar ser contactado para continuar"
+      "Debés aceptar ser contactado para continuar",
     ),
   }),
 ];

@@ -37,7 +37,7 @@ export const useContactForm = () => {
           setIsSubmitted(true);
           showToast({
             title: "Mensaje enviado",
-            description: "Te respondemos en menos de 24hs",
+            description: "Te respondemos lo antes posible.",
             type: "success",
           });
         } catch (error) {
