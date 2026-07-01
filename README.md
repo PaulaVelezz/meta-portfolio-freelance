@@ -105,6 +105,7 @@ src/
 - [x] Multi-step Contact Form
 - [x] Google Sheets Integration
 - [x] Anti-spam protection (honeypot, reCAPTCHA v3, rate limiting)
+- [x] Multi-service WhatsApp Command Palette
 
 ---
 
